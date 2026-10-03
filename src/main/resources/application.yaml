@@ -1,0 +1,27 @@
+spring:
+  application:
+    name: planner
+
+server:
+  port: 8080
+
+embabel:
+  models:
+    default-llm: google/gemini-2.5-flash
+
+  openrouter:
+    base-url: https://openrouter.ai/api/v1
+
+  workflow:
+    visualizer:
+      enabled: true
+
+# Set via environment variable: export OPENROUTER_API_KEY=your_key
+# Required by embabel-agent-starter-openai (OpenAiModelsConfig) at startup to avoid missing API key validation failure
+OPENAI_API_KEY: ${OPENROUTER_API_KEY:}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,embabel
