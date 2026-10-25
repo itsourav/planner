@@ -1,0 +1,30 @@
+# Chat and embedding models served by OpenRouter through its OpenAI-compatible API.
+# Activated via spring.profiles.active=openrouter
+embabel:
+  models:
+    default-llm: ${embabel.models.llms.best}
+    default-embedding-model: openrouter_embedding
+    embedding-services:
+      lite: openrouter_embedding
+      best: openrouter_embedding
+    llms:
+      best: ${OPENROUTER_MODEL_BEST:google/gemini-2.5-flash}
+      lite: ${OPENROUTER_MODEL_LITE:google/gemini-2.5-flash-lite}
+  agent:
+    platform:
+      ranking:
+        llm: ${embabel.models.llms.best}
+
+llm:
+  openrouter:
+    base-url: ${OPENROUTER_BASE_URL:https://openrouter.ai/api/v1}
+    retry-attempts: 3
+    embedding:
+      model: ${OPENROUTER_EMBEDDING_MODEL:openai/text-embedding-3-small}
+      dimensions: ${OPENROUTER_EMBEDDING_DIMENSIONS:}
+    audio:
+      model: ${OPENROUTER_AUDIO_MODEL:openai/whisper-large-v3}
+
+# Required by embabel-agent-starter-openai (OpenAiModelsConfig) at startup to avoid missing API key validation failure
+OPENAI_API_KEY: ${OPENROUTER_API_KEY:}
+# OPENAI_API_KEY: ${OPENROUTER_API_KEY:your_openrouter_api_key_here}

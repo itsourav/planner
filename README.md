@@ -27,9 +27,13 @@ Set your OpenRouter API key as an environment variable before launching the appl
 export OPENROUTER_API_KEY="your-openrouter-api-key-here"
 ```
 
-You can configure additional settings in [`src/main/resources/application.yaml`](file:///Users/sourav/Documents/Development/Agent%20Development/planner/src/main/resources/application.yaml):
-- `embabel.models.default-llm`: Default LLM (e.g. `google/gemini-2.5-flash`)
-- `embabel.openrouter.base-url`: Base URL for OpenRouter API
+The application uses the `openrouter` Spring profile (active by default in [`src/main/resources/application.yaml`](file:///Users/sourav/Documents/Development/Agent%20Development/planner/src/main/resources/application.yaml)).
+
+Configuration settings in [`src/main/resources/application-openrouter.yaml`](file:///Users/sourav/Documents/Development/Agent%20Development/planner/src/main/resources/application-openrouter.yaml):
+- `OPENROUTER_MODEL_BEST`: Best model for planning and complex tasks (default: `google/gemini-2.5-flash`)
+- `OPENROUTER_MODEL_LITE`: Lite model for low-latency tasks (default: `google/gemini-2.5-flash`)
+- `OPENROUTER_EMBEDDING_MODEL`: Embedding model (default: `openai/text-embedding-3-small`)
+- `OPENROUTER_BASE_URL`: Base URL (default: `https://openrouter.ai/api/v1`)
 - `server.port`: Server port (default: `8080`)
 
 ---
